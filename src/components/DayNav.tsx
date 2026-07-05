@@ -49,8 +49,6 @@ export default function DayNav({
         </div>
       </div>
 
-      <div className="flower-strip" />
-
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-4 py-3 sm:px-8">
         <a
           href={groceryNearMeUrl()}

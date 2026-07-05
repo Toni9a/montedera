@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getItinerary } from "@/lib/data";
-import FlowerDecor from "@/components/FlowerDecor";
 import { groceryNearMeUrl } from "@/lib/links";
 
 export const dynamic = "force-dynamic";
@@ -10,12 +9,6 @@ export default function TripOverview() {
 
   return (
     <div className="relative flex flex-1 flex-col overflow-hidden">
-      <FlowerDecor className="pointer-events-none absolute -left-10 top-24 h-[280px] w-[100px] opacity-70 sm:h-[420px] sm:w-[170px] sm:opacity-100" />
-      <FlowerDecor
-        flip
-        className="pointer-events-none absolute -right-10 top-96 h-[280px] w-[100px] opacity-70 sm:h-[420px] sm:w-[170px] sm:opacity-100"
-      />
-
       <header className="relative overflow-hidden">
         <div className="absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -37,8 +30,6 @@ export default function TripOverview() {
           <div className="divider-flourish mt-2 w-48 text-white/80">✿</div>
         </div>
       </header>
-
-      <div className="flower-strip" />
 
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-4 px-5 py-12 sm:px-8">
         <p className="chip text-center text-[var(--purple)]">Choose a day</p>
@@ -72,8 +63,6 @@ export default function TripOverview() {
           🛒 Grocery near me
         </a>
       </main>
-
-      <div className="flower-strip" />
 
       <footer className="relative border-t border-[var(--brown-light)]/30 bg-white/50 px-6 py-6 text-center">
         <Link

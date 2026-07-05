@@ -34,7 +34,7 @@ export default async function DayPage({
           {prevDay ? (
             <Link
               href={`/day/${prevDay.id}`}
-              className="chip rounded-full border border-[var(--purple-soft)]/50 px-4 py-2 text-[var(--purple-deep)] hover:bg-white"
+              className="chip rounded-full border border-[var(--purple-soft)]/50 bg-white/85 px-4 py-2 text-[var(--purple-deep)] shadow-sm hover:bg-white"
             >
               ← {prevDay.label}
             </Link>
@@ -52,8 +52,6 @@ export default async function DayPage({
             <span />
           )}
         </div>
-
-        <div className="flower-strip mt-10" />
       </main>
     </div>
   );

@@ -18,7 +18,7 @@ export default function StopCard({ stop }: { stop: Stop }) {
   const hasAlts = Boolean(stop.alternatives?.length);
 
   return (
-    <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[var(--brown-light)]/30 bg-white/70 shadow-sm backdrop-blur-sm transition hover:shadow-md">
+    <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[var(--brown-light)]/30 bg-white/55 shadow-sm backdrop-blur-sm transition hover:shadow-md">
       {showImage ? (
         <div className="h-40 w-full overflow-hidden sm:h-48">
           {/* eslint-disable-next-line @next/next/no-img-element */}
