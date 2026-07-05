@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getAdminPassword } from "@/lib/admin";
 import { getItinerary, saveItinerary } from "@/lib/data";
 import type { Itinerary } from "@/lib/types";
 
@@ -9,7 +10,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const password = req.headers.get("x-admin-password");
-  if (password !== process.env.ADMIN_PASSWORD) {
+  if (password !== getAdminPassword()) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

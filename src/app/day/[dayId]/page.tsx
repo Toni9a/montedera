@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getAirbnbLocation } from "@/lib/airbnb";
 import { getItinerary } from "@/lib/data";
+import { googleMapsUrl } from "@/lib/links";
 import { getDayWeather } from "@/lib/weather";
 import DayNav from "@/components/DayNav";
 import DayTimeline from "@/components/DayTimeline";
@@ -23,6 +25,9 @@ export default async function DayPage({
   const prevDay = itinerary.days[index - 1];
   const nextDay = itinerary.days[index + 1];
   const weather = await getDayWeather(day.date);
+  const airbnb = getAirbnbLocation(itinerary);
+  const homeButtonClass =
+    "inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--brown-light)]/30 bg-white/85 text-[var(--purple-deep)] shadow-sm transition hover:bg-white";
 
   return (
     <div className="flex flex-1 flex-col">
@@ -30,13 +35,25 @@ export default async function DayPage({
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-10 sm:px-8">
         <div className="mb-5 flex justify-end">
-          <Link
-            href="/trip"
-            aria-label="Go home"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--brown-light)]/30 bg-white/85 text-[var(--purple-deep)] shadow-sm transition hover:bg-white"
-          >
-            <HouseIcon className="h-5 w-5" />
-          </Link>
+          {airbnb ? (
+            <a
+              href={googleMapsUrl(airbnb.mapsQuery)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Airbnb in Google Maps"
+              className={homeButtonClass}
+            >
+              <HouseIcon className="h-5 w-5" />
+            </a>
+          ) : (
+            <Link
+              href="/trip"
+              aria-label="Set Airbnb"
+              className={homeButtonClass}
+            >
+              <HouseIcon className="h-5 w-5" />
+            </Link>
+          )}
         </div>
 
         <DayTimeline day={day} index={index} />
