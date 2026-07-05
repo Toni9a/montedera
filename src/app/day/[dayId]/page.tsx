@@ -4,6 +4,7 @@ import { getItinerary } from "@/lib/data";
 import { getDayWeather } from "@/lib/weather";
 import DayNav from "@/components/DayNav";
 import DayTimeline from "@/components/DayTimeline";
+import { HouseIcon } from "@/components/icons";
 
 export const dynamic = "force-dynamic";
 
@@ -28,6 +29,16 @@ export default async function DayPage({
       <DayNav days={itinerary.days} weather={weather} />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 py-10 sm:px-8">
+        <div className="mb-5 flex justify-end">
+          <Link
+            href="/trip"
+            aria-label="Go home"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--brown-light)]/30 bg-white/85 text-[var(--purple-deep)] shadow-sm transition hover:bg-white"
+          >
+            <HouseIcon className="h-5 w-5" />
+          </Link>
+        </div>
+
         <DayTimeline day={day} index={index} />
 
         <div className="mt-12 flex items-center justify-between gap-3">

@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import { phrases } from "@/data/phrases";
 
 export default function PhrasesPanel() {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   return (
     <>
@@ -20,7 +17,6 @@ export default function PhrasesPanel() {
       </button>
 
       {open &&
-        mounted &&
         createPortal(
           <div
             className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 sm:items-center"

@@ -35,9 +35,16 @@ export interface DayPlan {
   stops: Stop[];
 }
 
+export interface AirbnbLocation {
+  name: string;
+  address: string;
+  mapsQuery: string;
+}
+
 export interface Itinerary {
   tripTitle: string;
   subtitle: string;
   heroImage?: string;
+  airbnb?: AirbnbLocation;
   days: DayPlan[];
 }

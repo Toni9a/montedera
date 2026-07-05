@@ -1,16 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import type { Alternative, Itinerary, Stop, StopType } from "@/lib/types";
+import { useEffect, useMemo, useState } from "react";
+import type { Itinerary, Stop, StopType } from "@/lib/types";
+import { applyAirbnbLocation, getAirbnbLocation, placeQuery } from "@/lib/airbnb";
 
-const STOP_TYPES: StopType[] = [
-  "drive",
-  "coffee",
-  "food",
-  "activity",
-  "beach",
-  "stay",
-  "drinks",
+const STOP_TYPES: { value: StopType; label: string }[] = [
+  { value: "activity", label: "Activity" },
+  { value: "food", label: "Food" },
+  { value: "coffee", label: "Coffee" },
+  { value: "drinks", label: "Drinks" },
+  { value: "beach", label: "Beach" },
+  { value: "drive", label: "Drive" },
+  { value: "stay", label: "Airbnb" },
 ];
 
 function emptyStop(): Stop {
@@ -31,18 +32,15 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(false);
   const [authError, setAuthError] = useState("");
-  const [checking, setChecking] = useState(true);
-
+  const [checking, setChecking] = useState(false);
   const [itinerary, setItinerary] = useState<Itinerary | null>(null);
-  const [status, setStatus] = useState<string>("");
+  const [selectedDayId, setSelectedDayId] = useState("");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const saved = sessionStorage.getItem("admin-password");
     if (saved) {
-      setPassword(saved);
       verify(saved);
-    } else {
-      setChecking(false);
     }
   }, []);
 
@@ -53,15 +51,20 @@ export default function AdminPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password: pw }),
     });
+
     if (res.ok) {
       sessionStorage.setItem("admin-password", pw);
+      setPassword(pw);
       setAuthed(true);
-      const data = await fetch("/api/itinerary").then((r) => r.json());
+      const data = (await fetch("/api/itinerary").then((r) => r.json())) as Itinerary;
       setItinerary(data);
+      setSelectedDayId(data.days[0]?.id ?? "");
+      setAuthError("");
     } else {
       setAuthError("Wrong password");
       sessionStorage.removeItem("admin-password");
     }
+
     setChecking(false);
   }
 
@@ -76,83 +79,64 @@ export default function AdminPage() {
       },
       body: JSON.stringify(itinerary),
     });
-    setStatus(res.ok ? "Saved ✓" : "Failed to save");
-    setTimeout(() => setStatus(""), 2000);
+
+    setStatus(res.ok ? "Saved" : "Save failed");
+    setTimeout(() => setStatus(""), 2200);
+  }
+
+  const selectedDayIdx = useMemo(() => {
+    if (!itinerary) return -1;
+    const found = itinerary.days.findIndex((day) => day.id === selectedDayId);
+    return found >= 0 ? found : 0;
+  }, [itinerary, selectedDayId]);
+
+  const selectedDay = itinerary?.days[selectedDayIdx];
+
+  function patchItinerary(recipe: (next: Itinerary) => void) {
+    if (!itinerary) return;
+    const next = structuredClone(itinerary);
+    recipe(next);
+    setItinerary(next);
   }
 
   function updateStop(dayIdx: number, stopIdx: number, patch: Partial<Stop>) {
-    if (!itinerary) return;
-    const next = structuredClone(itinerary);
-    next.days[dayIdx].stops[stopIdx] = {
-      ...next.days[dayIdx].stops[stopIdx],
-      ...patch,
-    };
-    setItinerary(next);
+    patchItinerary((next) => {
+      next.days[dayIdx].stops[stopIdx] = {
+        ...next.days[dayIdx].stops[stopIdx],
+        ...patch,
+      };
+    });
   }
 
   function addStop(dayIdx: number) {
-    if (!itinerary) return;
-    const next = structuredClone(itinerary);
-    next.days[dayIdx].stops.push(emptyStop());
-    setItinerary(next);
+    patchItinerary((next) => {
+      next.days[dayIdx].stops.push(emptyStop());
+    });
   }
 
   function removeStop(dayIdx: number, stopIdx: number) {
-    if (!itinerary) return;
-    const next = structuredClone(itinerary);
-    next.days[dayIdx].stops.splice(stopIdx, 1);
-    setItinerary(next);
+    patchItinerary((next) => {
+      next.days[dayIdx].stops.splice(stopIdx, 1);
+    });
   }
 
-  function addAlternative(dayIdx: number, stopIdx: number) {
-    if (!itinerary) return;
-    const next = structuredClone(itinerary);
-    const stop = next.days[dayIdx].stops[stopIdx];
-    stop.alternatives = [
-      ...(stop.alternatives ?? []),
-      { name: "", mapsQuery: "", note: "" },
-    ];
-    setItinerary(next);
+  function updateAirbnb(patch: Partial<Pick<Stop, "name" | "address" | "mapsQuery">>) {
+    patchItinerary((next) => {
+      const current = getAirbnbLocation(next) ?? {
+        name: "Airbnb",
+        address: "",
+        mapsQuery: "",
+      };
+      applyAirbnbLocation(next, {
+        name: patch.name ?? current.name,
+        address: patch.address ?? current.address,
+      });
+    });
   }
 
-  function updateAlternative(
-    dayIdx: number,
-    stopIdx: number,
-    altIdx: number,
-    patch: Partial<Alternative>
-  ) {
-    if (!itinerary) return;
-    const next = structuredClone(itinerary);
-    const alts = next.days[dayIdx].stops[stopIdx].alternatives;
-    if (!alts) return;
-    alts[altIdx] = { ...alts[altIdx], ...patch };
-    setItinerary(next);
-  }
-
-  function removeAlternative(dayIdx: number, stopIdx: number, altIdx: number) {
-    if (!itinerary) return;
-    const next = structuredClone(itinerary);
-    const stop = next.days[dayIdx].stops[stopIdx];
-    stop.alternatives = (stop.alternatives ?? []).filter((_, i) => i !== altIdx);
-    setItinerary(next);
-  }
-
-  function updateDayMeta(
-    dayIdx: number,
-    patch: Partial<{ label: string; title: string; date: string; notes: string }>
-  ) {
-    if (!itinerary) return;
-    const next = structuredClone(itinerary);
-    next.days[dayIdx] = { ...next.days[dayIdx], ...patch };
-    setItinerary(next);
-  }
-
-  function updateHeader(patch: Partial<{ tripTitle: string; subtitle: string; heroImage: string }>) {
-    if (!itinerary) return;
-    const next = structuredClone(itinerary);
-    Object.assign(next, patch);
-    setItinerary(next);
-  }
+  const airbnb = useMemo(() => {
+    return itinerary ? getAirbnbLocation(itinerary) : null;
+  }, [itinerary]);
 
   if (checking) {
     return (
@@ -170,7 +154,7 @@ export default function AdminPage() {
             e.preventDefault();
             verify(password);
           }}
-          className="w-full max-w-sm rounded-2xl border border-[var(--brown-light)]/30 bg-white/70 p-8 text-center shadow-sm"
+          className="w-full max-w-sm rounded-2xl border border-[var(--brown-light)]/30 bg-white/75 p-8 text-center shadow-sm backdrop-blur"
         >
           <h1 className="font-display mb-6 text-2xl font-semibold text-[var(--purple-deep)]">
             Admin access
@@ -180,7 +164,7 @@ export default function AdminPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="mb-3 w-full rounded-full border border-[var(--brown-light)]/40 px-4 py-2 text-center focus:outline-none focus:ring-2 focus:ring-[var(--purple-soft)]"
+            className="mb-3 w-full rounded-full border border-[var(--brown-light)]/40 bg-white/80 px-4 py-2 text-center focus:outline-none focus:ring-2 focus:ring-[var(--purple-soft)]"
           />
           {authError && <p className="mb-3 text-sm text-red-500">{authError}</p>}
           <button
@@ -194,246 +178,179 @@ export default function AdminPage() {
     );
   }
 
-  if (!itinerary) return null;
+  if (!itinerary || !selectedDay) return null;
 
   return (
-    <div className="mx-auto w-full max-w-4xl flex-1 px-5 py-10 sm:px-8">
-      <div className="mb-8 flex items-center justify-between gap-4">
-        <h1 className="font-display text-3xl font-semibold text-[var(--purple-deep)]">
-          Edit itinerary
-        </h1>
+    <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-6 px-5 py-8 sm:px-8">
+      <div className="flex flex-col gap-4 rounded-2xl border border-[var(--brown-light)]/30 bg-white/75 p-5 shadow-sm backdrop-blur sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="chip mb-2 text-[var(--purple)]">Trip admin</p>
+          <h1 className="font-display text-3xl font-semibold text-[var(--purple-deep)]">
+            Quick itinerary edits
+          </h1>
+        </div>
         <button
           onClick={save}
           className="rounded-full bg-[var(--purple)] px-5 py-2 text-white transition hover:bg-[var(--purple-deep)]"
         >
-          Save {status}
+          {status || "Save changes"}
         </button>
       </div>
 
-      <div className="mb-10 space-y-2 rounded-2xl border border-[var(--brown-light)]/30 bg-white/60 p-5">
-        <label className="block text-xs uppercase tracking-wide text-[var(--ink)]/50">
-          Trip title
-        </label>
-        <input
-          value={itinerary.tripTitle}
-          onChange={(e) => updateHeader({ tripTitle: e.target.value })}
-          className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
-        />
-        <label className="block text-xs uppercase tracking-wide text-[var(--ink)]/50">
-          Subtitle
-        </label>
-        <input
-          value={itinerary.subtitle}
-          onChange={(e) => updateHeader({ subtitle: e.target.value })}
-          className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
-        />
-        <label className="block text-xs uppercase tracking-wide text-[var(--ink)]/50">
-          Hero image URL
-        </label>
-        <input
-          value={itinerary.heroImage ?? ""}
-          onChange={(e) => updateHeader({ heroImage: e.target.value })}
-          className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
-        />
-      </div>
+      <section className="rounded-2xl border border-[var(--brown-light)]/30 bg-white/70 p-4 shadow-sm backdrop-blur">
+        <p className="chip mb-3 text-[var(--purple)]">Choose day</p>
+        <div className="grid gap-2 sm:grid-cols-4">
+          {itinerary.days.map((day) => {
+            const active = day.id === selectedDay.id;
+            return (
+              <button
+                key={day.id}
+                type="button"
+                onClick={() => setSelectedDayId(day.id)}
+                className={`rounded-xl border px-4 py-3 text-left transition ${
+                  active
+                    ? "border-[var(--purple)] bg-[var(--purple)] text-white"
+                    : "border-[var(--brown-light)]/30 bg-white/70 text-[var(--ink)] hover:border-[var(--purple-soft)]"
+                }`}
+              >
+                <span className="block text-xs uppercase tracking-wide opacity-70">
+                  {day.label}
+                </span>
+                <span className="font-display text-lg font-semibold">{day.title}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
 
-      <div className="space-y-12">
-        {itinerary.days.map((day, dayIdx) => (
-          <div key={day.id}>
-            <div className="mb-4 space-y-2 rounded-2xl border border-[var(--brown-light)]/30 bg-white/60 p-5">
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div>
-                  <label className="block text-xs uppercase tracking-wide text-[var(--ink)]/50">
-                    Day label
-                  </label>
-                  <input
-                    value={day.label}
-                    onChange={(e) => updateDayMeta(dayIdx, { label: e.target.value })}
-                    className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-wide text-[var(--ink)]/50">
-                    Day title
-                  </label>
-                  <input
-                    value={day.title}
-                    onChange={(e) => updateDayMeta(dayIdx, { title: e.target.value })}
-                    className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
-                  />
-                </div>
+      <section className="rounded-2xl border border-[var(--brown-light)]/30 bg-white/70 p-5 shadow-sm backdrop-blur">
+        <div className="mb-4 flex flex-col gap-1">
+          <p className="chip text-[var(--purple)]">Airbnb location</p>
+          <h2 className="font-display text-2xl font-semibold text-[var(--purple-deep)]">
+            Where are you staying?
+          </h2>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Field
+            label="Name"
+            value={airbnb?.name ?? "Airbnb"}
+            placeholder="Airbnb"
+            onChange={(value) => updateAirbnb({ name: value })}
+          />
+          <Field
+            label="Address or area"
+            value={airbnb?.address ?? ""}
+            placeholder="Kotor Old Town, Montenegro"
+            onChange={(value) => updateAirbnb({ address: value })}
+          />
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-[var(--brown-light)]/30 bg-white/70 p-5 shadow-sm backdrop-blur">
+        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="chip mb-2 text-[var(--purple)]">{selectedDay.label}</p>
+            <h2 className="font-display text-2xl font-semibold text-[var(--purple-deep)]">
+              {selectedDay.title}
+            </h2>
+          </div>
+          <button
+            onClick={() => addStop(selectedDayIdx)}
+            className="rounded-full border border-[var(--purple-soft)] bg-white/70 px-4 py-2 text-sm font-medium text-[var(--purple-deep)] transition hover:bg-[var(--purple-soft)]/15"
+          >
+            + Add stop
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          {selectedDay.stops.map((stop, stopIdx) => (
+            <div
+              key={stopIdx}
+              className="rounded-xl border border-[var(--brown-light)]/25 bg-white/65 p-4"
+            >
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <span className="chip text-[var(--purple)]">Stop {stopIdx + 1}</span>
+                <button
+                  onClick={() => removeStop(selectedDayIdx, stopIdx)}
+                  className="text-sm text-red-500 transition hover:text-red-600"
+                >
+                  Remove
+                </button>
               </div>
-              <label className="block text-xs uppercase tracking-wide text-[var(--ink)]/50">
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field
+                  label="Name"
+                  value={stop.name}
+                  placeholder="Dinner, beach, coffee..."
+                  onChange={(value) => {
+                    updateStop(selectedDayIdx, stopIdx, {
+                      name: value,
+                      mapsQuery: placeQuery(value, stop.address ?? ""),
+                    });
+                  }}
+                />
+                <div>
+                  <label className="mb-1 block text-xs uppercase tracking-wide text-[var(--ink)]/50">
+                    Type
+                  </label>
+                  <select
+                    value={stop.type}
+                    onChange={(e) =>
+                      updateStop(selectedDayIdx, stopIdx, {
+                        type: e.target.value as StopType,
+                      })
+                    }
+                    className="w-full rounded-lg border border-[var(--brown-light)]/30 bg-white/80 px-3 py-2"
+                  >
+                    {STOP_TYPES.map((type) => (
+                      <option key={type.value} value={type.value}>
+                        {type.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <Field
+                  label="Time"
+                  value={stop.time ?? ""}
+                  placeholder="Morning, 14:30, dinner..."
+                  onChange={(value) => updateStop(selectedDayIdx, stopIdx, { time: value })}
+                />
+                <Field
+                  label="Place or address"
+                  value={stop.address ?? ""}
+                  placeholder="Kotor, Montenegro"
+                  onChange={(value) =>
+                    updateStop(selectedDayIdx, stopIdx, {
+                      address: value,
+                      mapsQuery: placeQuery(stop.name, value),
+                    })
+                  }
+                />
+              </div>
+
+              <label className="mt-3 mb-1 block text-xs uppercase tracking-wide text-[var(--ink)]/50">
                 Notes
               </label>
-              <input
-                value={day.notes ?? ""}
-                onChange={(e) => updateDayMeta(dayIdx, { notes: e.target.value })}
-                className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
+              <textarea
+                value={stop.description ?? ""}
+                onChange={(e) =>
+                  updateStop(selectedDayIdx, stopIdx, { description: e.target.value })
+                }
+                placeholder="Anything useful for the group..."
+                className="min-h-24 w-full rounded-lg border border-[var(--brown-light)]/30 bg-white/80 px-3 py-2"
               />
             </div>
+          ))}
+        </div>
+      </section>
 
-            <div className="space-y-4">
-              {day.stops.map((stop, stopIdx) => (
-                <div
-                  key={stopIdx}
-                  className="rounded-2xl border border-[var(--brown-light)]/30 bg-white/50 p-4"
-                >
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className="chip text-[var(--purple)]">
-                      Stop {stopIdx + 1}
-                    </span>
-                    <button
-                      onClick={() => removeStop(dayIdx, stopIdx)}
-                      className="text-xs text-red-500 hover:underline"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <Field
-                      label="Name"
-                      value={stop.name}
-                      onChange={(v) => updateStop(dayIdx, stopIdx, { name: v })}
-                    />
-                    <div>
-                      <label className="block text-xs uppercase tracking-wide text-[var(--ink)]/50">
-                        Type
-                      </label>
-                      <select
-                        value={stop.type}
-                        onChange={(e) =>
-                          updateStop(dayIdx, stopIdx, {
-                            type: e.target.value as StopType,
-                          })
-                        }
-                        className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
-                      >
-                        {STOP_TYPES.map((t) => (
-                          <option key={t} value={t}>
-                            {t}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <Field
-                      label="Time"
-                      value={stop.time ?? ""}
-                      onChange={(v) => updateStop(dayIdx, stopIdx, { time: v })}
-                    />
-                    <Field
-                      label="Google Maps search query"
-                      value={stop.mapsQuery}
-                      onChange={(v) => updateStop(dayIdx, stopIdx, { mapsQuery: v })}
-                    />
-                    <Field
-                      label="Address"
-                      value={stop.address ?? ""}
-                      onChange={(v) => updateStop(dayIdx, stopIdx, { address: v })}
-                    />
-                    <Field
-                      label="Phone"
-                      value={stop.phone ?? ""}
-                      onChange={(v) => updateStop(dayIdx, stopIdx, { phone: v })}
-                    />
-                    <Field
-                      label="Instagram (handle or URL)"
-                      value={stop.instagram ?? ""}
-                      onChange={(v) => updateStop(dayIdx, stopIdx, { instagram: v })}
-                    />
-                    <Field
-                      label="Image URL"
-                      value={stop.image ?? ""}
-                      onChange={(v) => updateStop(dayIdx, stopIdx, { image: v })}
-                    />
-                  </div>
-                  <label className="mt-3 block text-xs uppercase tracking-wide text-[var(--ink)]/50">
-                    Description
-                  </label>
-                  <textarea
-                    value={stop.description ?? ""}
-                    onChange={(e) =>
-                      updateStop(dayIdx, stopIdx, { description: e.target.value })
-                    }
-                    className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
-                    rows={2}
-                  />
-
-                  <div className="mt-4 border-t border-dashed border-[var(--brown-light)]/40 pt-3">
-                    <p className="chip mb-2 text-[var(--brown)]">Alternatives</p>
-                    <div className="space-y-2">
-                      {(stop.alternatives ?? []).map((alt, altIdx) => (
-                        <div
-                          key={altIdx}
-                          className="grid grid-cols-1 gap-2 rounded-lg bg-[var(--cream-alt)]/50 p-3 sm:grid-cols-3"
-                        >
-                          <input
-                            value={alt.name}
-                            onChange={(e) =>
-                              updateAlternative(dayIdx, stopIdx, altIdx, {
-                                name: e.target.value,
-                              })
-                            }
-                            placeholder="Name"
-                            className="rounded-lg border border-[var(--brown-light)]/30 px-2 py-1.5 text-sm"
-                          />
-                          <input
-                            value={alt.mapsQuery}
-                            onChange={(e) =>
-                              updateAlternative(dayIdx, stopIdx, altIdx, {
-                                mapsQuery: e.target.value,
-                              })
-                            }
-                            placeholder="Maps search query"
-                            className="rounded-lg border border-[var(--brown-light)]/30 px-2 py-1.5 text-sm"
-                          />
-                          <div className="flex gap-2">
-                            <input
-                              value={alt.note ?? ""}
-                              onChange={(e) =>
-                                updateAlternative(dayIdx, stopIdx, altIdx, {
-                                  note: e.target.value,
-                                })
-                              }
-                              placeholder="Note"
-                              className="w-full rounded-lg border border-[var(--brown-light)]/30 px-2 py-1.5 text-sm"
-                            />
-                            <button
-                              onClick={() => removeAlternative(dayIdx, stopIdx, altIdx)}
-                              className="shrink-0 text-xs text-red-500 hover:underline"
-                            >
-                              ✕
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <button
-                      onClick={() => addAlternative(dayIdx, stopIdx)}
-                      className="chip mt-2 rounded-full border border-[var(--purple-soft)] px-3 py-1 text-[var(--purple-deep)] hover:bg-[var(--purple-soft)]/15"
-                    >
-                      + Add alternative
-                    </button>
-                  </div>
-                </div>
-              ))}
-              <button
-                onClick={() => addStop(dayIdx)}
-                className="chip rounded-full border border-[var(--purple-soft)] px-4 py-2 text-[var(--purple-deep)] hover:bg-[var(--purple-soft)]/15"
-              >
-                + Add stop
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-10 flex justify-end">
+      <div className="flex justify-end">
         <button
           onClick={save}
           className="rounded-full bg-[var(--purple)] px-5 py-2 text-white transition hover:bg-[var(--purple-deep)]"
         >
-          Save {status}
+          {status || "Save changes"}
         </button>
       </div>
     </div>
@@ -443,21 +360,24 @@ export default function AdminPage() {
 function Field({
   label,
   value,
+  placeholder,
   onChange,
 }: {
   label: string;
   value: string;
-  onChange: (v: string) => void;
+  placeholder?: string;
+  onChange: (value: string) => void;
 }) {
   return (
     <div>
-      <label className="block text-xs uppercase tracking-wide text-[var(--ink)]/50">
+      <label className="mb-1 block text-xs uppercase tracking-wide text-[var(--ink)]/50">
         {label}
       </label>
       <input
         value={value}
+        placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-[var(--brown-light)]/30 px-3 py-2"
+        className="w-full rounded-lg border border-[var(--brown-light)]/30 bg-white/80 px-3 py-2"
       />
     </div>
   );

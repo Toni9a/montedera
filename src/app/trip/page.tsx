@@ -1,4 +1,6 @@
 import Link from "next/link";
+import AirbnbQuickAction from "@/components/AirbnbQuickAction";
+import { getAirbnbLocation } from "@/lib/airbnb";
 import { getItinerary } from "@/lib/data";
 import { groceryNearMeUrl } from "@/lib/links";
 
@@ -6,6 +8,7 @@ export const dynamic = "force-dynamic";
 
 export default function TripOverview() {
   const itinerary = getItinerary();
+  const airbnb = getAirbnbLocation(itinerary);
 
   return (
     <div className="relative flex flex-1 flex-col overflow-hidden">
@@ -20,6 +23,12 @@ export default function TripOverview() {
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--purple-deep)]/70 via-[var(--purple-deep)]/50 to-[var(--cream)]" />
         </div>
         <div className="relative flex min-h-[70vh] flex-col items-center justify-end gap-4 px-6 pb-14 pt-24 text-center sm:min-h-[60vh]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icon.png"
+            alt="Girls trip logo"
+            className="mb-1 h-24 w-24 rounded-full border border-white/70 bg-white/90 object-cover p-1 shadow-lg sm:h-28 sm:w-28"
+          />
           <p className="chip text-[var(--gold)]">Girls Trip</p>
           <h1 className="font-display text-4xl font-bold text-white drop-shadow-sm sm:text-6xl">
             Dera &amp; Friends
@@ -32,6 +41,8 @@ export default function TripOverview() {
       </header>
 
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-4 px-5 py-12 sm:px-8">
+        <AirbnbQuickAction initialAirbnb={airbnb} />
+
         <p className="chip text-center text-[var(--purple)]">Choose a day</p>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

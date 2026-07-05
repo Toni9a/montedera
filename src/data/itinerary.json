@@ -43,18 +43,30 @@
           "instagram": "senso_restaurant",
           "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEBcWJNMqKVyo3iTEeuEhQ0VZ-MLaaoEVUx1bCJVgzU_19uwpbiHeBrShVaV5cNa_tDViWQY-iJdOvEVJk6YvPUdex0pGMthizEbYRS9PyBgH8nrxH0N3ZFxwZBh0PnUMaaE8-mmrJLrQ7c=w1200-h800-p-k-no",
           "alternatives": [
-            { "name": "CAVE Coffee Specialty", "mapsQuery": "CAVE Coffee Specialty, Kotor Old Town, Montenegro", "note": "Specialty coffee, old town" },
-            { "name": "Too Hot to Handle Coffee Roasting Co.", "mapsQuery": "Too Hot to Handle Coffee Roasting Co., Kotor, Montenegro", "note": "Local roastery" },
-            { "name": "Niente Cafe Bar", "mapsQuery": "Niente Cafe Bar, Kotor Old Town, Montenegro", "note": "Cafe bar in the old town" }
+            {
+              "name": "CAVE Coffee Specialty",
+              "mapsQuery": "CAVE Coffee Specialty, Kotor Old Town, Montenegro",
+              "note": "Specialty coffee, old town"
+            },
+            {
+              "name": "Too Hot to Handle Coffee Roasting Co.",
+              "mapsQuery": "Too Hot to Handle Coffee Roasting Co., Kotor, Montenegro",
+              "note": "Local roastery"
+            },
+            {
+              "name": "Niente Cafe Bar",
+              "mapsQuery": "Niente Cafe Bar, Kotor Old Town, Montenegro",
+              "note": "Cafe bar in the old town"
+            }
           ]
         },
         {
-          "name": "Check in",
+          "name": "Airbnb",
           "type": "stay",
           "time": "",
           "description": "Check in to the Airbnb and settle in.",
-          "mapsQuery": "Kotor, Montenegro",
-          "address": "",
+          "mapsQuery": "Airbnb, 181 2, 181 2, Dobrota, Montenegro",
+          "address": "181 2, 181 2, Dobrota, Montenegro",
           "phone": "",
           "instagram": "",
           "image": ""
@@ -70,9 +82,21 @@
           "instagram": "",
           "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEldPcFvjMm9bJ7Uy3ARuKgHfQuBKxaVnaKrR1ODDOaoUTdOOO_F6n3dxfYfdDsCL7Ex2nxTRiefds1PliSjkrDxa7prPNyOZVpxRhI51NjHncNzZpKpn51oHeb5EZ82iGS8_CR4w=w800-h600-p-k-no",
           "alternatives": [
-            { "name": "Konoba Scala Santa", "mapsQuery": "Konoba Scala Santa, Kotor Old Town, Montenegro", "note": "Traditional Montenegrin konoba" },
-            { "name": "Old Town Little Bay", "mapsQuery": "Old Town Little Bay, Kotor, Montenegro", "note": "Seafood-focused" },
-            { "name": "Trattoria Karampana", "mapsQuery": "Trattoria Karampana, Kotor, Montenegro", "note": "Popular pasta spot" }
+            {
+              "name": "Konoba Scala Santa",
+              "mapsQuery": "Konoba Scala Santa, Kotor Old Town, Montenegro",
+              "note": "Traditional Montenegrin konoba"
+            },
+            {
+              "name": "Old Town Little Bay",
+              "mapsQuery": "Old Town Little Bay, Kotor, Montenegro",
+              "note": "Seafood-focused"
+            },
+            {
+              "name": "Trattoria Karampana",
+              "mapsQuery": "Trattoria Karampana, Kotor, Montenegro",
+              "note": "Popular pasta spot"
+            }
           ]
         }
       ]
@@ -128,9 +152,21 @@
           "instagram": "monte1350_bar",
           "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGs31WhN-uFly2JMnpK30R2Rl86nAZOG2jtb3BohHI0V8iPt6uI2sSy_KrTGCwO_yttrCoptIt2-aVF2bIlsTK7iEliNGYK8ePec-ns6LM2eKazhKaPzQFLBRRu4SY1xHfMPcaVyL2WEKnN=w800-h600-p-k-no",
           "alternatives": [
-            { "name": "Forest Caffe Bar", "mapsQuery": "Forest caffe bar, Lovcen, Kotor, Montenegro", "note": "Nearby cafe bar" },
-            { "name": "Letrika Caffe Bar", "mapsQuery": "Letrika Caffe Bar, Kotor, Montenegro", "note": "Coffee and drinks" },
-            { "name": "Resto Bar Taraca", "mapsQuery": "Resto Bar Taraca, Kotor, Montenegro", "note": "Bar with a view" }
+            {
+              "name": "Forest Caffe Bar",
+              "mapsQuery": "Forest caffe bar, Lovcen, Kotor, Montenegro",
+              "note": "Nearby cafe bar"
+            },
+            {
+              "name": "Letrika Caffe Bar",
+              "mapsQuery": "Letrika Caffe Bar, Kotor, Montenegro",
+              "note": "Coffee and drinks"
+            },
+            {
+              "name": "Resto Bar Taraca",
+              "mapsQuery": "Resto Bar Taraca, Kotor, Montenegro",
+              "note": "Bar with a view"
+            }
           ]
         },
         {
@@ -155,9 +191,21 @@
           "instagram": "mayabayportomontenegro",
           "image": "https://www.mayabayrestaurant.com/uploads/media/1416x1424/03/303-MayaBay%20Porto%20Montenegro.webp",
           "alternatives": [
-            { "name": "Agape Porto Montenegro", "mapsQuery": "Agape, Porto Montenegro, Tivat, Montenegro", "note": "Marina-front dining" },
-            { "name": "Marea Porto Montenegro", "mapsQuery": "Marea, Porto Montenegro, Tivat, Montenegro", "note": "Seafood on the water" },
-            { "name": "Bokka Modern", "mapsQuery": "Bokka Modern, Porto Montenegro, Tivat, Montenegro", "note": "Modern Mediterranean" }
+            {
+              "name": "Agape Porto Montenegro",
+              "mapsQuery": "Agape, Porto Montenegro, Tivat, Montenegro",
+              "note": "Marina-front dining"
+            },
+            {
+              "name": "Marea Porto Montenegro",
+              "mapsQuery": "Marea, Porto Montenegro, Tivat, Montenegro",
+              "note": "Seafood on the water"
+            },
+            {
+              "name": "Bokka Modern",
+              "mapsQuery": "Bokka Modern, Porto Montenegro, Tivat, Montenegro",
+              "note": "Modern Mediterranean"
+            }
           ]
         }
       ]
@@ -202,9 +250,21 @@
           "instagram": "oliva.coffee",
           "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF5MW9kU8ntnoGr02LFFrtCuf0cbBIECm3xs-sDaXScjQMmccJBTLl4IJ9sD8bPDfPBiHF5LY3nqp7RjxngjkgYVMIpMhQqszOQaT4RVOWr8UtTA2KhLY6-aF9K8xwfkySeubfpy-qNCiat=w1200-h800-p-k-no",
           "alternatives": [
-            { "name": "CUPS Coffeeshop", "mapsQuery": "CUPS Coffeeshop, Budva, Montenegro", "note": "Specialty coffee in Budva" },
-            { "name": "Peacock Coffee House", "mapsQuery": "Peacock Coffee House, Budva, Montenegro", "note": "Popular brunch spot too" },
-            { "name": "North Coffee Shop", "mapsQuery": "North Coffee Shop, Budva, Montenegro", "note": "Cozy coffee stop" }
+            {
+              "name": "CUPS Coffeeshop",
+              "mapsQuery": "CUPS Coffeeshop, Budva, Montenegro",
+              "note": "Specialty coffee in Budva"
+            },
+            {
+              "name": "Peacock Coffee House",
+              "mapsQuery": "Peacock Coffee House, Budva, Montenegro",
+              "note": "Popular brunch spot too"
+            },
+            {
+              "name": "North Coffee Shop",
+              "mapsQuery": "North Coffee Shop, Budva, Montenegro",
+              "note": "Cozy coffee stop"
+            }
           ]
         },
         {
@@ -218,9 +278,21 @@
           "instagram": "",
           "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGBkE6lTnwMSSMfvSnm91DVpqlNrviRbeV-hGVofalrdn_XK-vi5jyF5HHXtFkYgMMV7wMKS7kt-wL1Me8VD6zzbBHKu67mUJOJNnwHlGuhSA4qezBpLt4JhEuPqPwswIy6w-9BnqQCHAA=w1200-h800-p-k-no",
           "alternatives": [
-            { "name": "Fluffy Pancakes Budva", "mapsQuery": "Fluffy pancakes Budva, Montenegro", "note": "Pancake brunch spot" },
-            { "name": "Cafe Beatrice", "mapsQuery": "Cafe Beatrice, Budva, Montenegro", "note": "Relaxed brunch cafe" },
-            { "name": "Granola", "mapsQuery": "Granola, Budva, Montenegro", "note": "Healthy brunch bowls" }
+            {
+              "name": "Fluffy Pancakes Budva",
+              "mapsQuery": "Fluffy pancakes Budva, Montenegro",
+              "note": "Pancake brunch spot"
+            },
+            {
+              "name": "Cafe Beatrice",
+              "mapsQuery": "Cafe Beatrice, Budva, Montenegro",
+              "note": "Relaxed brunch cafe"
+            },
+            {
+              "name": "Granola",
+              "mapsQuery": "Granola, Budva, Montenegro",
+              "note": "Healthy brunch bowls"
+            }
           ]
         },
         {
@@ -309,9 +381,21 @@
           "instagram": "marshallsgelato_mne",
           "image": "https://www.marshallsgelato.com/wp-content/uploads/2019/12/naslovna-marshalls-gelato.png",
           "alternatives": [
-            { "name": "Perchè Gelateria", "mapsQuery": "Perche Gelateria, Kotor Old Town, Montenegro", "note": "Italian-style gelato" },
-            { "name": "Davanti Gelateria & Bistro", "mapsQuery": "Davanti Gelateria & Bistro, Kotor, Montenegro", "note": "Gelato and bites" },
-            { "name": "Ice Lab", "mapsQuery": "Ice Lab ice cream rolls, Kotor, Montenegro", "note": "Rolled ice cream" }
+            {
+              "name": "Perchè Gelateria",
+              "mapsQuery": "Perche Gelateria, Kotor Old Town, Montenegro",
+              "note": "Italian-style gelato"
+            },
+            {
+              "name": "Davanti Gelateria & Bistro",
+              "mapsQuery": "Davanti Gelateria & Bistro, Kotor, Montenegro",
+              "note": "Gelato and bites"
+            },
+            {
+              "name": "Ice Lab",
+              "mapsQuery": "Ice Lab ice cream rolls, Kotor, Montenegro",
+              "note": "Rolled ice cream"
+            }
           ]
         },
         {
@@ -337,12 +421,12 @@
           "image": ""
         },
         {
-          "name": "Back to Airbnb",
+          "name": "Airbnb",
           "type": "stay",
           "time": "",
           "description": "Rest and freshen up back at the Airbnb.",
-          "mapsQuery": "Kotor, Montenegro",
-          "address": "",
+          "mapsQuery": "Airbnb, 181 2, 181 2, Dobrota, Montenegro",
+          "address": "181 2, 181 2, Dobrota, Montenegro",
           "phone": "",
           "instagram": "",
           "image": ""
@@ -358,12 +442,29 @@
           "instagram": "horizontrestaurant",
           "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEnyJaPwD2VK5DFewGgO2KznagFXLwLLNHMlTVl5Iizxk_ET_53MOLIqOKoV5cVs-zK653Ei-TZRCKpMvAa9Ix_CW1gcB-cQMdK5IZ_npMDgm8UDa-4t-8wSs7L51fZu8X_kbEXYA=w1200-h800-p-k-no",
           "alternatives": [
-            { "name": "The Nitrox Pub & Eatery", "mapsQuery": "The Nitrox Pub & Eatery, Kotor, Montenegro", "note": "Laid-back pub" },
-            { "name": "Rooftop Terrace Hippocampus", "mapsQuery": "Rooftop Terrace Hippocampus, Kotor, Montenegro", "note": "Rooftop views" },
-            { "name": "Holy Shot Bar", "mapsQuery": "Holy Shot Bar, Kotor, Montenegro", "note": "Lively cocktail bar" }
+            {
+              "name": "The Nitrox Pub & Eatery",
+              "mapsQuery": "The Nitrox Pub & Eatery, Kotor, Montenegro",
+              "note": "Laid-back pub"
+            },
+            {
+              "name": "Rooftop Terrace Hippocampus",
+              "mapsQuery": "Rooftop Terrace Hippocampus, Kotor, Montenegro",
+              "note": "Rooftop views"
+            },
+            {
+              "name": "Holy Shot Bar",
+              "mapsQuery": "Holy Shot Bar, Kotor, Montenegro",
+              "note": "Lively cocktail bar"
+            }
           ]
         }
       ]
     }
-  ]
+  ],
+  "airbnb": {
+    "name": "Airbnb",
+    "address": "181 2, 181 2, Dobrota, Montenegro",
+    "mapsQuery": "Airbnb, 181 2, 181 2, Dobrota, Montenegro"
+  }
 }

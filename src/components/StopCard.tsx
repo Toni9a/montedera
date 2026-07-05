@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { Stop } from "@/lib/types";
+import type { AirbnbLocation, Stop } from "@/lib/types";
+import { hasAirbnbMaps } from "@/lib/airbnb";
 import {
   googleMapsUrl,
   googleMapsDirectionsUrl,
@@ -9,13 +10,36 @@ import {
   instagramUrl,
   stopTypeMeta,
 } from "@/lib/links";
+import { HouseIcon, MapPinIcon } from "./icons";
 
 export default function StopCard({ stop }: { stop: Stop }) {
   const meta = stopTypeMeta[stop.type];
   const [imageFailed, setImageFailed] = useState(false);
   const [showAlts, setShowAlts] = useState(false);
+  const [localAirbnb, setLocalAirbnb] = useState<AirbnbLocation | null>(null);
   const showImage = Boolean(stop.image) && !imageFailed;
   const hasAlts = Boolean(stop.alternatives?.length);
+  const mapsQuery = localAirbnb?.mapsQuery ?? stop.mapsQuery;
+  const address = localAirbnb?.address ?? stop.address;
+  const airbnbNeedsLocation =
+    stop.type === "stay" && !hasAirbnbMaps(mapsQuery, address);
+
+  async function setAirbnbFromCard() {
+    const nextAddress = window.prompt("Airbnb address or area in Kotor");
+    if (!nextAddress?.trim()) return;
+
+    const res = await fetch("/api/airbnb", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "Airbnb", address: nextAddress.trim() }),
+    });
+
+    if (!res.ok) return;
+
+    const data = (await res.json()) as { airbnb: AirbnbLocation };
+    setLocalAirbnb(data.airbnb);
+    window.open(googleMapsUrl(data.airbnb.mapsQuery), "_blank", "noopener,noreferrer");
+  }
 
   return (
     <div className="relative flex flex-col overflow-hidden rounded-2xl border border-[var(--brown-light)]/30 bg-white/55 shadow-sm backdrop-blur-sm transition hover:shadow-md">
@@ -55,27 +79,41 @@ export default function StopCard({ stop }: { stop: Stop }) {
             {stop.description}
           </p>
         )}
-        {stop.address && (
-          <p className="text-xs text-[var(--ink)]/50">{stop.address}</p>
+        {address && (
+          <p className="text-xs text-[var(--ink)]/50">{address}</p>
         )}
 
         <div className="mt-2 flex flex-wrap gap-2">
-          <a
-            href={googleMapsUrl(stop.mapsQuery)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="chip inline-flex items-center gap-1 rounded-full bg-[var(--purple)] px-3 py-1.5 text-white transition hover:bg-[var(--purple-deep)]"
-          >
-            📍 Maps
-          </a>
-          <a
-            href={googleMapsDirectionsUrl(stop.mapsQuery)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="chip inline-flex items-center gap-1 rounded-full border border-[var(--purple)] px-3 py-1.5 text-[var(--purple-deep)] transition hover:bg-[var(--purple)]/10"
-          >
-            🧭 Route
-          </a>
+          {airbnbNeedsLocation ? (
+            <button
+              type="button"
+              onClick={setAirbnbFromCard}
+              className="chip inline-flex items-center gap-1 rounded-full bg-[var(--purple)] px-3 py-1.5 text-white transition hover:bg-[var(--purple-deep)]"
+            >
+              <HouseIcon className="h-4 w-4" />
+              Set Airbnb
+            </button>
+          ) : (
+            <>
+              <a
+                href={googleMapsUrl(mapsQuery)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="chip inline-flex items-center gap-1 rounded-full bg-[var(--purple)] px-3 py-1.5 text-white transition hover:bg-[var(--purple-deep)]"
+              >
+                <MapPinIcon className="h-4 w-4" />
+                Maps
+              </a>
+              <a
+                href={googleMapsDirectionsUrl(mapsQuery)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="chip inline-flex items-center gap-1 rounded-full border border-[var(--purple)] px-3 py-1.5 text-[var(--purple-deep)] transition hover:bg-[var(--purple)]/10"
+              >
+                Route
+              </a>
+            </>
+          )}
           {stop.phone && (
             <a
               href={telUrl(stop.phone)}
