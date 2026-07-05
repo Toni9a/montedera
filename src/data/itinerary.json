@@ -1,0 +1,369 @@
+{
+  "tripTitle": "Dera's Montenegro Girls Trip",
+  "subtitle": "Kotor Bay • 8–11 July 2026",
+  "heroImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Kotor_-_Old_Town.jpg/1280px-Kotor_-_Old_Town.jpg",
+  "days": [
+    {
+      "id": "day-1",
+      "date": "2026-07-08",
+      "label": "8th July, Wednesday",
+      "title": "Arrival in Kotor",
+      "notes": "",
+      "stops": [
+        {
+          "name": "Drive to Porto Montenegro",
+          "type": "drive",
+          "time": "",
+          "description": "Scenic drive along the bay to the marina in Tivat.",
+          "mapsQuery": "Porto Montenegro, Obala bb, Tivat, Montenegro",
+          "address": "Obala bb, 85320 Tivat, Montenegro",
+          "phone": "",
+          "instagram": "portomontenegro",
+          "image": "https://portomontenegro.com/wp-content/uploads/2026/05/ef72f7d7698d2d274a36d33a61fb34106e1db641-scaled.jpg"
+        },
+        {
+          "name": "Drive to Kotor Old Town",
+          "type": "drive",
+          "time": "",
+          "description": "Continue on to the walled old town of Kotor.",
+          "mapsQuery": "Kotor Old Town, Stari Grad, Kotor, Montenegro",
+          "address": "Stari Grad, 85330 Kotor, Montenegro",
+          "phone": "",
+          "instagram": "",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Kotor_-_Old_Town.jpg/1280px-Kotor_-_Old_Town.jpg"
+        },
+        {
+          "name": "Coffee at Senso",
+          "type": "coffee",
+          "time": "",
+          "description": "Coffee stop tucked in Kotor's old town.",
+          "mapsQuery": "Senso Bakery, Old Town 360, Kotor, Montenegro",
+          "address": "Old Town 360, 85330 Kotor, Montenegro",
+          "phone": "",
+          "instagram": "senso_restaurant",
+          "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEBcWJNMqKVyo3iTEeuEhQ0VZ-MLaaoEVUx1bCJVgzU_19uwpbiHeBrShVaV5cNa_tDViWQY-iJdOvEVJk6YvPUdex0pGMthizEbYRS9PyBgH8nrxH0N3ZFxwZBh0PnUMaaE8-mmrJLrQ7c=w1200-h800-p-k-no",
+          "alternatives": [
+            { "name": "CAVE Coffee Specialty", "mapsQuery": "CAVE Coffee Specialty, Kotor Old Town, Montenegro", "note": "Specialty coffee, old town" },
+            { "name": "Too Hot to Handle Coffee Roasting Co.", "mapsQuery": "Too Hot to Handle Coffee Roasting Co., Kotor, Montenegro", "note": "Local roastery" },
+            { "name": "Niente Cafe Bar", "mapsQuery": "Niente Cafe Bar, Kotor Old Town, Montenegro", "note": "Cafe bar in the old town" }
+          ]
+        },
+        {
+          "name": "Check in",
+          "type": "stay",
+          "time": "",
+          "description": "Check in to the Airbnb and settle in.",
+          "mapsQuery": "Kotor, Montenegro",
+          "address": "",
+          "phone": "",
+          "instagram": "",
+          "image": ""
+        },
+        {
+          "name": "Dinner at La Catedral",
+          "type": "food",
+          "time": "Dinner",
+          "description": "Pasta bar dinner in Kotor old town.",
+          "mapsQuery": "La Catedral Pasta Bar, Stari Grad 340, Kotor, Montenegro",
+          "address": "Stari Grad 340, 85330 Kotor, Montenegro",
+          "phone": "+382 67 711 711",
+          "instagram": "",
+          "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEldPcFvjMm9bJ7Uy3ARuKgHfQuBKxaVnaKrR1ODDOaoUTdOOO_F6n3dxfYfdDsCL7Ex2nxTRiefds1PliSjkrDxa7prPNyOZVpxRhI51NjHncNzZpKpn51oHeb5EZ82iGS8_CR4w=w800-h600-p-k-no",
+          "alternatives": [
+            { "name": "Konoba Scala Santa", "mapsQuery": "Konoba Scala Santa, Kotor Old Town, Montenegro", "note": "Traditional Montenegrin konoba" },
+            { "name": "Old Town Little Bay", "mapsQuery": "Old Town Little Bay, Kotor, Montenegro", "note": "Seafood-focused" },
+            { "name": "Trattoria Karampana", "mapsQuery": "Trattoria Karampana, Kotor, Montenegro", "note": "Popular pasta spot" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day-2",
+      "date": "2026-07-09",
+      "label": "9th July, Thursday",
+      "title": "Perast & Porto Montenegro",
+      "notes": "",
+      "stops": [
+        {
+          "name": "Breakfast",
+          "type": "food",
+          "time": "Breakfast",
+          "description": "Breakfast at the Airbnb before heading out.",
+          "mapsQuery": "Kotor, Montenegro",
+          "address": "",
+          "phone": "",
+          "instagram": "",
+          "image": ""
+        },
+        {
+          "name": "Drive to Perast promenade",
+          "type": "drive",
+          "time": "",
+          "description": "Beautiful bayside promenade lined with baroque palaces.",
+          "mapsQuery": "Perast, Montenegro",
+          "address": "Perast, 85336 Montenegro",
+          "phone": "",
+          "instagram": "",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Widok_na_Perast_z_zachodu_01.JPG/1280px-Widok_na_Perast_z_zachodu_01.JPG"
+        },
+        {
+          "name": "Our Lady of the Rocks (boat ride)",
+          "type": "activity",
+          "time": "",
+          "description": "Boat ride out to the island church, Gospa od Škrpjela.",
+          "mapsQuery": "Our Lady of the Rocks, Perast, Montenegro",
+          "address": "Bay of Kotor, off Perast, Montenegro",
+          "phone": "",
+          "instagram": "",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Church_Of_Our_Lady_of_the_Rocks.jpg"
+        },
+        {
+          "name": "Monte 1350 / Forza (coffee/drinks)",
+          "type": "coffee",
+          "time": "",
+          "description": "Coffee and drinks stop up at Kuk, overlooking the bay.",
+          "mapsQuery": "Monte 1350 bar, 9QWW+868, Kotor, Montenegro",
+          "address": "9QWW+868, Kotor, Montenegro",
+          "phone": "",
+          "instagram": "monte1350_bar",
+          "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGs31WhN-uFly2JMnpK30R2Rl86nAZOG2jtb3BohHI0V8iPt6uI2sSy_KrTGCwO_yttrCoptIt2-aVF2bIlsTK7iEliNGYK8ePec-ns6LM2eKazhKaPzQFLBRRu4SY1xHfMPcaVyL2WEKnN=w800-h600-p-k-no",
+          "alternatives": [
+            { "name": "Forest Caffe Bar", "mapsQuery": "Forest caffe bar, Lovcen, Kotor, Montenegro", "note": "Nearby cafe bar" },
+            { "name": "Letrika Caffe Bar", "mapsQuery": "Letrika Caffe Bar, Kotor, Montenegro", "note": "Coffee and drinks" },
+            { "name": "Resto Bar Taraca", "mapsQuery": "Resto Bar Taraca, Kotor, Montenegro", "note": "Bar with a view" }
+          ]
+        },
+        {
+          "name": "Drive to Porto Montenegro",
+          "type": "drive",
+          "time": "",
+          "description": "Head back to the marina for dinner.",
+          "mapsQuery": "Porto Montenegro, Obala bb, Tivat, Montenegro",
+          "address": "Obala bb, 85320 Tivat, Montenegro",
+          "phone": "",
+          "instagram": "portomontenegro",
+          "image": "https://portomontenegro.com/wp-content/uploads/2026/05/ef72f7d7698d2d274a36d33a61fb34106e1db641-scaled.jpg"
+        },
+        {
+          "name": "Dinner at Mayabay",
+          "type": "food",
+          "time": "Dinner",
+          "description": "Dinner at Mayabay, right on the marina.",
+          "mapsQuery": "MayaBay, Porto Montenegro, Tivat, Montenegro",
+          "address": "Porto Montenegro, Obala bb, 85320 Tivat, Montenegro",
+          "phone": "+382 69 352 221",
+          "instagram": "mayabayportomontenegro",
+          "image": "https://www.mayabayrestaurant.com/uploads/media/1416x1424/03/303-MayaBay%20Porto%20Montenegro.webp",
+          "alternatives": [
+            { "name": "Agape Porto Montenegro", "mapsQuery": "Agape, Porto Montenegro, Tivat, Montenegro", "note": "Marina-front dining" },
+            { "name": "Marea Porto Montenegro", "mapsQuery": "Marea, Porto Montenegro, Tivat, Montenegro", "note": "Seafood on the water" },
+            { "name": "Bokka Modern", "mapsQuery": "Bokka Modern, Porto Montenegro, Tivat, Montenegro", "note": "Modern Mediterranean" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day-3",
+      "date": "2026-07-10",
+      "label": "10th July, Friday",
+      "title": "Budva & Beach Day",
+      "notes": "",
+      "stops": [
+        {
+          "name": "Breakfast",
+          "type": "food",
+          "time": "Breakfast",
+          "description": "Breakfast before heading out.",
+          "mapsQuery": "Kotor, Montenegro",
+          "address": "",
+          "phone": "",
+          "instagram": "",
+          "image": ""
+        },
+        {
+          "name": "Drive to Budva Old Town",
+          "type": "drive",
+          "time": "",
+          "description": "Explore the walled old town of Budva.",
+          "mapsQuery": "Budva Old Town, Stari Grad, Budva, Montenegro",
+          "address": "Stari Grad, 85310 Budva, Montenegro",
+          "phone": "",
+          "instagram": "",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/View_over_the_Old_Town_of_Budva_from_the_Citadel.jpg/1280px-View_over_the_Old_Town_of_Budva_from_the_Citadel.jpg"
+        },
+        {
+          "name": "Coffee at Oliva Coffee",
+          "type": "coffee",
+          "time": "",
+          "description": "Coffee stop in Budva.",
+          "mapsQuery": "Oliva Coffee, Maslina 23, Budva, Montenegro",
+          "address": "Maslina 23, 85310 Budva, Montenegro",
+          "phone": "+382 68 584 886",
+          "instagram": "oliva.coffee",
+          "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAF5MW9kU8ntnoGr02LFFrtCuf0cbBIECm3xs-sDaXScjQMmccJBTLl4IJ9sD8bPDfPBiHF5LY3nqp7RjxngjkgYVMIpMhQqszOQaT4RVOWr8UtTA2KhLY6-aF9K8xwfkySeubfpy-qNCiat=w1200-h800-p-k-no",
+          "alternatives": [
+            { "name": "CUPS Coffeeshop", "mapsQuery": "CUPS Coffeeshop, Budva, Montenegro", "note": "Specialty coffee in Budva" },
+            { "name": "Peacock Coffee House", "mapsQuery": "Peacock Coffee House, Budva, Montenegro", "note": "Popular brunch spot too" },
+            { "name": "North Coffee Shop", "mapsQuery": "North Coffee Shop, Budva, Montenegro", "note": "Cozy coffee stop" }
+          ]
+        },
+        {
+          "name": "Brunch at Adriatic Waffle House",
+          "type": "food",
+          "time": "Brunch",
+          "description": "Waffles and brunch in Budva.",
+          "mapsQuery": "Adriatic Waffle House, Zrtava Fasizma 28, Budva, Montenegro",
+          "address": "28 Žrtava Fašizma, 85311 Budva, Montenegro",
+          "phone": "+382 68 616 087",
+          "instagram": "",
+          "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGBkE6lTnwMSSMfvSnm91DVpqlNrviRbeV-hGVofalrdn_XK-vi5jyF5HHXtFkYgMMV7wMKS7kt-wL1Me8VD6zzbBHKu67mUJOJNnwHlGuhSA4qezBpLt4JhEuPqPwswIy6w-9BnqQCHAA=w1200-h800-p-k-no",
+          "alternatives": [
+            { "name": "Fluffy Pancakes Budva", "mapsQuery": "Fluffy pancakes Budva, Montenegro", "note": "Pancake brunch spot" },
+            { "name": "Cafe Beatrice", "mapsQuery": "Cafe Beatrice, Budva, Montenegro", "note": "Relaxed brunch cafe" },
+            { "name": "Granola", "mapsQuery": "Granola, Budva, Montenegro", "note": "Healthy brunch bowls" }
+          ]
+        },
+        {
+          "name": "Sveti Stefan (swim)",
+          "type": "beach",
+          "time": "",
+          "description": "Swim near the iconic island of Sveti Stefan.",
+          "mapsQuery": "Sveti Stefan, Montenegro",
+          "address": "Sveti Stefan, 85315 Budva Municipality, Montenegro",
+          "phone": "",
+          "instagram": "amansvetistefan",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Sveti_Stefan_%2806%29.jpg/1280px-Sveti_Stefan_%2806%29.jpg"
+        },
+        {
+          "name": "Przno Beach (swim)",
+          "type": "beach",
+          "time": "",
+          "description": "Relax and swim at Przno beach, just along the coast.",
+          "mapsQuery": "Przno Beach, Budva Municipality, Montenegro",
+          "address": "Przno, Budva Municipality, Montenegro",
+          "phone": "",
+          "instagram": "",
+          "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH9TdvfTbERLzgs9eSmro2cPONDagQFF11Dsshi00UXShFvZnWcNQsfdcOnpXoqqorTRnJs6Ghsm4GOLq9iSnVSsaqxbriPrwlfcW37xHhjB7UhWwj7JKg4z95X398K6p2Z67XW1PTZ3Az-=w1200-h800-p-k-no"
+        },
+        {
+          "name": "Dinner: Konoba More",
+          "type": "food",
+          "time": "Dinner",
+          "description": "Option A — seafood konoba right on the water in Przno.",
+          "mapsQuery": "Konoba More, Obala 18, Przno, Budva, Montenegro",
+          "address": "Obala 18, Przno, Budva Municipality, Montenegro",
+          "phone": "+382 33 468 255",
+          "instagram": "_konoba_more",
+          "image": "https://konobamore.me/images/pic-pic.png"
+        },
+        {
+          "name": "Dinner: La Mar",
+          "type": "food",
+          "time": "Dinner",
+          "description": "Option B — beachfront seafood restaurant in Przno.",
+          "mapsQuery": "La Mar Restaurant, Obala bb, Przno, Budva, Montenegro",
+          "address": "Obala bb, Przno, Budva Municipality, Montenegro",
+          "phone": "+382 68 743 748",
+          "instagram": "lamar.restaurant",
+          "image": "https://lamarbudva.me/images/home/koncept.jpg"
+        },
+        {
+          "name": "OR drive back to Kotor: Pomodorino",
+          "type": "food",
+          "time": "Dinner",
+          "description": "Option C — Italian dinner back in Kotor old town.",
+          "mapsQuery": "Pomodorino, Stari Grad 451, Kotor, Montenegro",
+          "address": "Stari Grad 451, 85330 Kotor, Montenegro",
+          "phone": "+382 69 905 727",
+          "instagram": "",
+          "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGKWBVdB7xcV8NhQEDo1-CSGVMtxWlryLABe-9nobIg_oie1zJk0MUhTxWqR5Ffsj0pHuOkfTRzbPxCDcnReccqn7Uf5BTSjgiJA0dAUPlE3ALNipRhhyDoNx33fUnIDDtaNnzakCE4H97q=w1200-h800-p-k-no"
+        }
+      ]
+    },
+    {
+      "id": "day-4",
+      "date": "2026-07-11",
+      "label": "11th July, Saturday",
+      "title": "Kotor Hike & Last Night",
+      "notes": "",
+      "stops": [
+        {
+          "name": "Breakfast",
+          "type": "food",
+          "time": "Breakfast",
+          "description": "Breakfast at the Airbnb.",
+          "mapsQuery": "Kotor, Montenegro",
+          "address": "",
+          "phone": "",
+          "instagram": "",
+          "image": ""
+        },
+        {
+          "name": "Marshal's Gelato",
+          "type": "coffee",
+          "time": "",
+          "description": "Gelato stop before the hike.",
+          "mapsQuery": "Marshall's Gelato, Stari Grad, Kotor, Montenegro",
+          "address": "Stari Grad, 85330 Kotor, Montenegro",
+          "phone": "+382 69 521 871",
+          "instagram": "marshallsgelato_mne",
+          "image": "https://www.marshallsgelato.com/wp-content/uploads/2019/12/naslovna-marshalls-gelato.png",
+          "alternatives": [
+            { "name": "Perchè Gelateria", "mapsQuery": "Perche Gelateria, Kotor Old Town, Montenegro", "note": "Italian-style gelato" },
+            { "name": "Davanti Gelateria & Bistro", "mapsQuery": "Davanti Gelateria & Bistro, Kotor, Montenegro", "note": "Gelato and bites" },
+            { "name": "Ice Lab", "mapsQuery": "Ice Lab ice cream rolls, Kotor, Montenegro", "note": "Rolled ice cream" }
+          ]
+        },
+        {
+          "name": "Hike San Giovanni",
+          "type": "activity",
+          "time": "",
+          "description": "Hike up the city walls to St John's (San Giovanni) fortress for the view over Kotor Bay.",
+          "mapsQuery": "St John's Fortress, Kotor, Montenegro",
+          "address": "Kotor city walls, 85330 Kotor, Montenegro",
+          "phone": "",
+          "instagram": "",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Kotor_-_Old_Town.jpg/1280px-Kotor_-_Old_Town.jpg"
+        },
+        {
+          "name": "Food in Kotor Old Town",
+          "type": "food",
+          "time": "",
+          "description": "Food stop back down in the old town.",
+          "mapsQuery": "Kotor Old Town, Stari Grad, Kotor, Montenegro",
+          "address": "Stari Grad, 85330 Kotor, Montenegro",
+          "phone": "",
+          "instagram": "",
+          "image": ""
+        },
+        {
+          "name": "Back to Airbnb",
+          "type": "stay",
+          "time": "",
+          "description": "Rest and freshen up back at the Airbnb.",
+          "mapsQuery": "Kotor, Montenegro",
+          "address": "",
+          "phone": "",
+          "instagram": "",
+          "image": ""
+        },
+        {
+          "name": "Horizont Bar",
+          "type": "drinks",
+          "time": "Night",
+          "description": "Last-night drinks with a view over the bay.",
+          "mapsQuery": "Horizont Restaurant Bar, Zanjev, Kotor, Montenegro",
+          "address": "Zanjev bb, Kotor–Cetinje road, Montenegro",
+          "phone": "+382 69 777 997",
+          "instagram": "horizontrestaurant",
+          "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEnyJaPwD2VK5DFewGgO2KznagFXLwLLNHMlTVl5Iizxk_ET_53MOLIqOKoV5cVs-zK653Ei-TZRCKpMvAa9Ix_CW1gcB-cQMdK5IZ_npMDgm8UDa-4t-8wSs7L51fZu8X_kbEXYA=w1200-h800-p-k-no",
+          "alternatives": [
+            { "name": "The Nitrox Pub & Eatery", "mapsQuery": "The Nitrox Pub & Eatery, Kotor, Montenegro", "note": "Laid-back pub" },
+            { "name": "Rooftop Terrace Hippocampus", "mapsQuery": "Rooftop Terrace Hippocampus, Kotor, Montenegro", "note": "Rooftop views" },
+            { "name": "Holy Shot Bar", "mapsQuery": "Holy Shot Bar, Kotor, Montenegro", "note": "Lively cocktail bar" }
+          ]
+        }
+      ]
+    }
+  ]
+}
