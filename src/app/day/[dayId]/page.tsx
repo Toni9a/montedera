@@ -16,7 +16,7 @@ export default async function DayPage({
   params: Promise<{ dayId: string }>;
 }) {
   const { dayId } = await params;
-  const itinerary = getItinerary();
+  const itinerary = await getItinerary();
   const index = itinerary.days.findIndex((d) => d.id === dayId);
 
   if (index === -1) notFound();

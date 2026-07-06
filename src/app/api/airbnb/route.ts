@@ -3,7 +3,7 @@ import { applyAirbnbLocation, getAirbnbLocation } from "@/lib/airbnb";
 import { getItinerary, saveItinerary } from "@/lib/data";
 
 export async function GET() {
-  const itinerary = getItinerary();
+  const itinerary = await getItinerary();
   return NextResponse.json({ airbnb: getAirbnbLocation(itinerary) });
 }
 
@@ -15,12 +15,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Address is required" }, { status: 400 });
   }
 
-  const itinerary = getItinerary();
-  applyAirbnbLocation(itinerary, {
-    name: body.name ?? "Airbnb",
-    address,
-  });
-  saveItinerary(itinerary);
+  try {
+    const itinerary = await getItinerary();
+    applyAirbnbLocation(itinerary, {
+      name: body.name ?? "Airbnb",
+      address,
+    });
+    await saveItinerary(itinerary);
 
-  return NextResponse.json({ airbnb: getAirbnbLocation(itinerary) });
+    return NextResponse.json({ airbnb: getAirbnbLocation(itinerary) });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Save failed" },
+      { status: 500 }
+    );
+  }
 }

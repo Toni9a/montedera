@@ -6,8 +6,8 @@ import { groceryNearMeUrl } from "@/lib/links";
 
 export const dynamic = "force-dynamic";
 
-export default function TripOverview() {
-  const itinerary = getItinerary();
+export default async function TripOverview() {
+  const itinerary = await getItinerary();
   const airbnb = getAirbnbLocation(itinerary);
 
   return (

@@ -96,7 +96,12 @@ export default function AdminPage() {
         }
       }
 
-      setStatus(res.ok ? "Saved" : "Save failed");
+      if (res.ok) {
+        setStatus("Saved");
+      } else {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        setStatus(data?.error ?? "Save failed");
+      }
     } catch {
       setStatus("Save failed");
     }

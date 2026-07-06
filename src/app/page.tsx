@@ -9,8 +9,8 @@ function todayInMontenegro(): string {
   }).format(new Date());
 }
 
-export default function Home() {
-  const itinerary = getItinerary();
+export default async function Home() {
+  const itinerary = await getItinerary();
   const today = todayInMontenegro();
   const match = itinerary.days.find((d) => d.date === today);
   redirect(`/day/${(match ?? itinerary.days[0]).id}`);
