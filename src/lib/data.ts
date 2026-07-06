@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { applyAirbnbLocation, getAirbnbLocation } from "./airbnb";
 import type { Itinerary } from "./types";
 
 const DATA_PATH = path.join(process.cwd(), "src", "data", "itinerary.json");
@@ -26,6 +27,14 @@ function isVercelRuntime() {
 function getLocalItinerary(): Itinerary {
   const raw = fs.readFileSync(DATA_PATH, "utf-8");
   return JSON.parse(raw) as Itinerary;
+}
+
+function normalizeItinerary(data: Itinerary): Itinerary {
+  const airbnb = getAirbnbLocation(data);
+  if (airbnb) {
+    applyAirbnbLocation(data, airbnb);
+  }
+  return data;
 }
 
 async function kvCommand<T>(command: string[]) {
@@ -57,15 +66,17 @@ async function kvCommand<T>(command: string[]) {
 export async function getItinerary(): Promise<Itinerary> {
   if (kvConfig()) {
     const stored = await kvCommand<string>(["GET", ITINERARY_KEY]);
-    if (stored) return JSON.parse(stored) as Itinerary;
+    if (stored) return normalizeItinerary(JSON.parse(stored) as Itinerary);
   }
 
-  return getLocalItinerary();
+  return normalizeItinerary(getLocalItinerary());
 }
 
 export async function saveItinerary(data: Itinerary): Promise<void> {
+  const normalized = normalizeItinerary(data);
+
   if (kvConfig()) {
-    await kvCommand<string>(["SET", ITINERARY_KEY, JSON.stringify(data)]);
+    await kvCommand<string>(["SET", ITINERARY_KEY, JSON.stringify(normalized)]);
     return;
   }
 
@@ -75,5 +86,5 @@ export async function saveItinerary(data: Itinerary): Promise<void> {
     );
   }
 
-  fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), "utf-8");
+  fs.writeFileSync(DATA_PATH, JSON.stringify(normalized, null, 2), "utf-8");
 }
