@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import type { Itinerary, Stop, StopType } from "@/lib/types";
 import { applyAirbnbLocation, getAirbnbLocation, placeQuery } from "@/lib/airbnb";
@@ -214,12 +215,20 @@ export default function AdminPage() {
             Quick itinerary edits
           </h1>
         </div>
-        <button
-          onClick={save}
-          className="rounded-full bg-[var(--purple)] px-5 py-2 text-white transition hover:bg-[var(--purple-deep)]"
-        >
-          {status || "Save changes"}
-        </button>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <Link
+            href="/trip"
+            className="rounded-full border border-[var(--purple-soft)] bg-white/75 px-5 py-2 text-center text-sm font-medium text-[var(--purple-deep)] transition hover:bg-[var(--purple-soft)]/15"
+          >
+            Back to trip
+          </Link>
+          <button
+            onClick={save}
+            className="rounded-full bg-[var(--purple)] px-5 py-2 text-white transition hover:bg-[var(--purple-deep)]"
+          >
+            {status || "Save changes"}
+          </button>
+        </div>
       </div>
 
       <section className="rounded-2xl border border-[var(--brown-light)]/30 bg-white/70 p-4 shadow-sm backdrop-blur">

@@ -6,8 +6,19 @@ export function placeQuery(name: string, address: string) {
   return [name, address].filter(Boolean).join(", ");
 }
 
+export function airbnbMapsQuery(address: string) {
+  return address.trim();
+}
+
 export function getAirbnbLocation(itinerary: Itinerary): AirbnbLocation | null {
-  if (itinerary.airbnb?.address) return itinerary.airbnb;
+  if (itinerary.airbnb?.address) {
+    const address = itinerary.airbnb.address.trim();
+    return {
+      name: itinerary.airbnb.name || "Airbnb",
+      address,
+      mapsQuery: airbnbMapsQuery(address),
+    };
+  }
 
   const stay = itinerary.days
     .flatMap((day) => day.stops)
@@ -18,7 +29,7 @@ export function getAirbnbLocation(itinerary: Itinerary): AirbnbLocation | null {
   return {
     name: stay.name || "Airbnb",
     address: stay.address,
-    mapsQuery: stay.mapsQuery || placeQuery(stay.name || "Airbnb", stay.address),
+    mapsQuery: airbnbMapsQuery(stay.address),
   };
 }
 
@@ -33,7 +44,7 @@ export function applyAirbnbLocation(
 ) {
   const name = location.name.trim() || "Airbnb";
   const address = location.address.trim();
-  const mapsQuery = placeQuery(name, address);
+  const mapsQuery = airbnbMapsQuery(address);
 
   itinerary.airbnb = { name, address, mapsQuery };
 
